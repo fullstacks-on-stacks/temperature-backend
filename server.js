@@ -14,7 +14,7 @@ app.listen(PORT, () => {
 
 request
   .post('http://temp.alchemycodelab.io/subscribe')
-  .send('https://app-temp-monitor.herokuapp.com/')
+  .send({ url: 'https://app-temp-monitor.herokuapp.com/' })
   .then(res => {
     console.log(res.body);
   });
