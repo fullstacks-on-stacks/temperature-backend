@@ -63,4 +63,24 @@ describe('app routes', () => {
         });
       });
   });
+
+  it('gets all Monitors', async() => {
+    const monitor = await Monitor.create([
+      { name: 'Pennsylvania' },
+      { name: 'Ohio' },
+      { name: 'Oregon' }
+    ]);
+
+    return request(app)
+      .get('/')
+      .then(res => {
+        const monitorsJSON = JSON.parse(JSON.stringify(monitor));
+        monitorsJSON.forEach(monitor => {
+          expect(res.body).toContainEqual({
+            name: monitor.name,
+            _id: monitor._id
+          });
+        });
+      });
+  });
 });
