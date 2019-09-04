@@ -24,11 +24,9 @@ describe('app routes', () => {
       { temperature: 25 },
       { temperature: 50 }
     ]);
-    console.log(temp)
     return request(app)
       .get('/temp')
       .then(res => {
-        console.log(res.body)
         const tempJSON = JSON.parse(JSON.stringify(temp));
         tempJSON.forEach(temp => {
           expect(res.body).toContainEqual({

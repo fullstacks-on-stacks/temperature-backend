@@ -1,6 +1,5 @@
 require('dotenv').config();
 const Monitor = require('../lib/models/Monitor');
-const Temperature = require('../lib/models/Temperature');
 
 const request = require('supertest');
 const app = require('../lib/app');
