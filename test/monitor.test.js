@@ -1,5 +1,6 @@
 require('dotenv').config();
 const Monitor = require('../lib/models/Monitor');
+const Temperature = require('../lib/models/Temperature');
 
 const request = require('supertest');
 const app = require('../lib/app');
@@ -45,6 +46,21 @@ describe('app routes', () => {
       .send({ id: monitor._id })
       .then(res => {
         expect(res.status).toEqual(204);
+      });
+  });
+
+  it('saves the temperature', async() => {
+    const monitor = await Monitor.create({ name: 'test' });
+    return request(app)
+      .post(`/temp/${monitor._id}`)
+      .send({ temperature: 32.56 })
+      .then(res => {
+        expect(res.body).toEqual({
+          temperature: 32.56,
+          _id: expect.any(String),
+          monitor: expect.any(String),
+          __v:0
+        });
       });
   });
 });
